@@ -4,18 +4,12 @@ Standalone repo-tool manifest for building the Kaos distro rootfs
 (hybris/kaos-configs/build-rootfs.sh) WITHOUT the full AOSP/LineageOS tree.
 
 Confirmed (2026-09-25) that build-rootfs.sh's own dependency graph needs
-only the projects listed below -- nothing under the AOSP source tree itself
+only the projects listed below; nothing under the AOSP source tree itself
 (Clang there is x86_64-only anyway; this manifest works on any host repo/
 docker can run on, including native Linux arm64 and macOS/Docker Desktop,
 Apple Silicon included).
 
-Usage on a fresh machine:
-  mkdir kaos-rootfs && cd kaos-rootfs
-  repo init -u https://github.com/kamstartech/kaos-rootfs-manifest.git
-  repo sync
-  git submodule update --init --recursive hybris/droid-configs/droid-configs-device
-  # then fetch the mesa-freedreno prebuilt blob -- see README.md
-  hybris/kaos-configs/build-rootfs.sh <distro>
+See README.md in this same repo for setup and usage instructions.
 -->
 <manifest>
   <remote name="kamstartech" fetch="https://github.com/kamstartech/" />
@@ -31,7 +25,7 @@ Usage on a fresh machine:
 
   <!-- Sparse config tree (DROID_SPARSE_DIR) installed into the rootfs.
        Has its own submodule (droid-configs-device, pinned to our
-       kamstartech fork of mer-hybris/droid-hal-configs) -- repo tool does
+       kamstartech fork of mer-hybris/droid-hal-configs); repo tool does
        not auto-init plain git submodules, run the submodule update command
        in the Usage note above after `repo sync`. -->
   <project name="droid-config-perseus" path="hybris/droid-configs" revision="master" />
@@ -49,7 +43,7 @@ Usage on a fresh machine:
   <project name="libdroid" path="hybris/mw/libdroid" revision="noble" />
 
   <!-- wlroots fork tracking Droidian's ongoing development (0.17.4 + 6414
-       commits) -- genuinely struct-incompatible with stock wlroots 0.17.1,
+       commits); genuinely struct-incompatible with stock wlroots 0.17.1,
        see build-phoc-chroot.sh for why this matters. -->
   <project name="wlroots" path="hybris/mw/wlroots-hwcomposer" revision="noble" />
 </manifest>
