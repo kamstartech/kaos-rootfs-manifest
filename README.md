@@ -14,24 +14,6 @@ repo sync
 git submodule update --init --recursive hybris/droid-configs/droid-configs-device
 ```
 
-## mesa-freedreno (not repo-synced — it's a build product, not source)
-
-`hybris/mw/mesa-freedreno` is a prebuilt Mesa/freedreno driver stack
-(cross-compiled for the `aarch64-meego-linux-gnu` target), used by
-`build-rootfs.sh` for direct-KMS GPU rendering (`libEGL`, `libgbm`,
-`libGLESv2`, `libgallium_dri.so`, `libvulkan_freedreno.so`). It's a build
-artifact, not a git-trackable source tree — fetch it instead:
-
-```bash
-mkdir -p hybris/mw/mesa-freedreno
-curl -o hybris/mw/mesa-freedreno/mesa-freedreno-25.1.4.tar.bz2 \
-  https://kamstar.tech/sailfishos/updates/perseus/build-deps/mesa-freedreno-25.1.4.tar.bz2
-tar xf hybris/mw/mesa-freedreno/mesa-freedreno-25.1.4.tar.bz2 -C hybris/mw/mesa-freedreno
-```
-
-Then run `hybris/kaos-configs/build-mesa-kgsl.sh` to produce the
-`aarch64-meego-linux-gnu/` build output `build-rootfs.sh` actually mounts.
-
 ## Build
 
 ```bash
