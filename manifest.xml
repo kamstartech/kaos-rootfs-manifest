@@ -38,7 +38,9 @@ See README.md in this same repo for setup and usage instructions.
 
   <project name="libglibutil" path="hybris/mw/libglibutil" revision="master" />
 
-  <project name="libgbinder" path="hybris/mw/libgbinder" remote="mer-hybris" revision="master" />
+  <!-- kamstartech fork, not upstream mer-hybris: carries the aidl3-vnd/
+       aidl4-vnd /dev/vndbinder BINDER_VND_HEADER fix (2026-09-25). -->
+  <project name="libgbinder" path="hybris/mw/libgbinder" revision="master" />
 
   <project name="libdroid" path="hybris/mw/libdroid" revision="noble" />
 
