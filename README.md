@@ -11,11 +11,17 @@ touches it.
 mkdir kaos-rootfs && cd kaos-rootfs
 repo init -u https://github.com/kamstartech/kaos-rootfs-manifest.git -m manifest.xml
 repo sync
-git submodule update --init --recursive hybris/droid-configs/droid-configs-device
+(cd hybris/droid-configs && git submodule update --init --recursive)
 ```
 
 The `-m manifest.xml` is required — `repo init` defaults to looking for
 `default.xml`, which this repo doesn't have.
+
+The submodule command must run **from inside** `hybris/droid-configs`, not
+from the top-level `kaos-rootfs` directory — under `repo`'s checkout layout,
+the top level is just a plain directory holding several independently
+repo-managed clones, not a git repo itself, so `git submodule` run from
+there fails with "fatal: not a git repository."
 
 kaos-configs, droid-config-perseus, android-headers, libhybris, and
 libgbinder are private repos. Authenticate before `repo sync`:
